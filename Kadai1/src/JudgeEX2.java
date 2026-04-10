@@ -15,7 +15,7 @@ public class JudgeEX2 {
 		int[] draws = new int[members];
 
         for(int i=0; i<members; i++){
-			for(int j=0; j<members; j++){
+			for(int j=i+1; j<members; j++){
 				for(int k=0; k<n; k++){
 					Hand tmpHand1 = players[i].showHand();
 					Hand tmpHand2 = players[j].showHand();
