@@ -1,0 +1,245 @@
+Kadai1 tempレポート
+
+学生番号: 02246908
+名前: 片岡啓
+
+課題1.1:
+    実行結果:
+        PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1> java HelloWorld
+        Hello World!
+
+課題1.2:
+    実験1. 引数に(1 2)を与えた場合:
+        実行結果:
+            PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1\src> java ArgsTest 1 2
+            Args 1: 1, 2: 2
+啓
+        実行結果:
+            PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1\src> java ArgsTest 64 256
+            Args 1: 64, 2: 256
+
+    実験3. 引数に(10)のみを与えたとき(引数が要求よりも少ない場合):
+        実行結果:
+            PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1\src> java ArgsTest 10    
+            Exception in thread "main" java.lang.ArrayIndexOutOfBoundsException: Index 1 out of bounds for length 1
+                    at ArgsTest.main(ArgsTest.java:3)
+        考察:
+            引数がソースコードの予想よりも少なく、引数を処理する該当箇所3行目でエラーが起きた。
+
+    実験4. 引数に(2 4 8)を与えた場合(引数が要求よりも多い場合):
+        実行結果:
+            PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1\src> java ArgsTest 2 4 8 
+            Args 1: 2, 2: 4
+        考察:
+            引数がソースコードの要求とは異なっていたが、引数が多いケースでは実験3のようにエラーとならずに最初の2つの数字のみを受け入れ実行された。
+            これは、プログラムはすべての引数を受け取っているものの、3行目においてargs[0]とargs[1]のみを使用しているためであると考えられる。
+
+    
+発展課題* 1.3:
+    実験1. 初期状態のarray1(array1 = {1.012, -2.599, 3.421}):
+        実行結果: 
+            PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1\src> java ClassMethodTest        
+            array1: 1.012 -2.599 3.421 
+            array1 sum: 1.834
+            array1 product: -8.998
+            array2: 2.012 -1.599 4.421
+            array2 sum: 4.834
+            array2 product: -14.223
+
+    実験2. 要素が一つのarray1(array1 = {5.0}):
+        実行結果:
+            PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1\src> java ArrayArithmetic        
+            array1: 5.000 
+            array1 sum: 5.000
+            array1 product: 5.000
+            array2: 6.000
+            array2 sum: 6.000
+            array2 product: 6.000
+    
+    実験3. 要素に0を含むarray1(array1 = {2.0, 0.0, 5.0}):
+        実行結果:
+            PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1\src> java ArrayArithmetic        
+            array1: 2.000 0.000 5.000 
+            array1 sum: 7.000
+            array1 product: 0.000
+            array2: 3.000 1.000 6.000
+            array2 sum: 10.000
+            array2 product: 18.000
+
+発展課題* 1.4:
+    実験1. 初期状態のarray1(array1 = {1.012, -2.599, 3.421}):
+        実行結果: 
+            PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1\src> java ArrayArithmeticEX        
+            array: 1 -2 3 
+            array sum: 2
+            array product: -6
+            opposite array: -1 2 -3
+
+    実験2. 要素が一つのarray1(array1 = {5.0}):
+        実行結果:
+            PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1\src> java ArrayArithmeticEX        
+            array: 5 
+            array sum: 5
+            array product: 5
+            opposite array: -5
+    
+    実験3. 要素に0を含むarray1(array1 = {2.0, 0.0, 5.0}):
+        実行結果:
+            PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1\src> java ArrayArithmeticEX
+            array: 2 0 5
+            array sum: 7
+            array product: 10
+            opposite array: -2 0 -5
+
+発展課題* 1.5:
+    実験1. 引数が(12)の場合:
+        実行結果:
+            PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1\src> java CollatzProblem 12
+            ステップ数: 9
+            実行結果:
+            12
+            6
+            3
+            10
+            5
+            16
+            8
+            4
+            2
+            1
+
+    実験2. 引数が(1)の場合:
+        実行結果:
+            PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1\src> java CollatzProblem 1 
+            ステップ数: 0
+            実行結果:
+            1
+
+    実験3. 引数が(27)の場合:
+        実験結果:
+        PS C:\Users\s02246908\joho_jikken\code-2246908\Kadai1\src> java CollatzProblem 27
+            ステップ数: 111
+            実行結果:
+            27
+            82
+            41
+            124
+            62
+            31
+            ~~~~~~~省略~~~~~~
+            5
+            16
+            8
+            4
+            2
+            1
+
+課題1.6:
+    equals(Object anObject):
+        StringであるObjectとanObjectを比較し、文字列が完全に一致していればTrueを返す。
+    indexOf(int ch):
+        chという文字列がどの位置に含まれているかをintで返し、存在しない場合は-1を返す。
+    length():
+        文字列の長さを返す。
+    toUpperCase():
+    文字列をすべて大文字に変換し返す。
+
+課題1.7:
+    自分が実装したメソッドの仕様:
+        不自然な大文字、空白が混入している文字列を、空白区切りですべて小文字のきれいな文字列にする。
+    使用したメソッド:
+        strip()
+        split(String regex)
+        toLowerCase()
+        join(CharSequence delimiter, CharSequence... elements)
+    アルゴリズム:
+        rawとして与えられた文字列を、(1)前後の空白を削除、(2)空白で分割、(3)すべての文字を小文字に、(4)改めて空白で再結合している。
+
+課題1.8
+    0~99までの整数値からランダムに選ばれた値が返る。
+
+発展問題* 1.9
+    nextInt(1001)を利用し、まずは0~1000までの乱数を生成し、値が奇数の場合は+1した値の符号を反転させることで一様な偶数乱数の生成を行った。
+
+発展問題* 1.10
+    素数判定のメソッドを作り、これをN回回すことで確かめた。
+    また、そのメソッドでは最初に偶数である場合を除外し、その後に奇数で割り切れる場合0を返すループをsqrt(n)まで行うことで高速化を図った。
+
+発展課題* 1.11
+    ソースコードを参照.
+
+発展課題* 1.12
+それぞれの状態の生起確率を結果とした。
+各実行における3回の試行を実行結果に示す。
+
+    実験1. m=1:
+        実行結果:
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java Judge2 1
+            winProb: 0.3
+            loseProb: 0.5
+            drawProb: 0.2
+
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java Judge2 1
+            winProb: 0.4
+            loseProb: 0.2
+            drawProb: 0.4
+
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java Judge2 1
+            winProb: 0.4
+            loseProb: 0.2
+            drawProb: 0.4
+
+    実験2. m=10:
+        実行結果:
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java Judge2 10
+            winProb: 0.33
+            loseProb: 0.41
+            drawProb: 0.26
+
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java Judge2 10
+            winProb: 0.29
+            loseProb: 0.35
+            drawProb: 0.36
+
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java Judge2 10
+            winProb: 0.35
+            loseProb: 0.33
+            drawProb: 0.32
+
+    実験3. m=100:
+        実行結果:
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java Judge2 100
+            winProb: 0.326
+            loseProb: 0.335
+            drawProb: 0.339
+
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java Judge2 100
+            winProb: 0.305
+            loseProb: 0.346
+            drawProb: 0.349
+
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java Judge2 100
+            winProb: 0.334
+            loseProb: 0.34
+            drawProb: 0.326
+
+    実験4. m=1000:
+        実行結果:
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java Judge2 1000
+            winProb: 0.334
+            loseProb: 0.3298
+            drawProb: 0.3362
+
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java Judge2 1000
+            winProb: 0.3278
+            loseProb: 0.3361
+            drawProb: 0.3361
+
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java Judge2 1000
+            winProb: 0.3356
+            loseProb: 0.3379
+            drawProb: 0.326
+
+    考察:
+        mが増加するにつれ結果のブレが小さくなり、各確率が1/3に収束しているように観察された。
+        これはモンテカルロ法の、試行回数を増やすほど真の値に収束する性質によるものであると考えられる。
