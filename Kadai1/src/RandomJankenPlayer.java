@@ -1,4 +1,5 @@
 import java.util.Random;
+import java.util.ArrayList;
 
 public class RandomJankenPlayer {
 	private String name;
@@ -6,13 +7,20 @@ public class RandomJankenPlayer {
 	private int winCnt;
 	private int loseCnt;
 	private int drawCnt;
+	private ArrayList<Hand> myHands;
+	private ArrayList<Hand> opponentHands;
+	private int WDL;
+	private int numROCK, numSCISSORS, numPAPER;
 
 	public RandomJankenPlayer(String name) {
 		this.name = name;
 		this.winCnt = winCnt;
 		this.loseCnt = loseCnt;
 		this.drawCnt = drawCnt;
+		this.
 		random = new Random();
+		myHands = new ArrayList<>(); // 空の ArrayList で初期化
+		opponentHands = new ArrayList<>();
 	}
 
 	public RandomJankenPlayer(String name, long seed) { 		
@@ -24,6 +32,8 @@ public class RandomJankenPlayer {
 			this.winCnt = 0;
 			this.loseCnt = 0;
 			this.drawCnt = 0;
+			myHands.clear(); // メソッドの意味は API リファレンスで確認せよ
+			opponentHands.clear(); 
 	}
 
 	public int getWinCnt(){
@@ -38,14 +48,53 @@ public class RandomJankenPlayer {
 		return this.drawCnt;
 	}
 
+	public void setWDL(int n){
+		this.WDL = n;
+	}
+
+	public int getWDL(){
+		return this.WDL;
+	}
+
+	public void setTend(int n){
+		if(n==0) numROCK++;
+		if(n==1) numSCISSORS++;
+		if(n==2) numPAPER++;
+	}
+
+	public int getTend(){
+		if(numROCK>numSCISSORS){
+			if(numROCK>numPAPER) return 0;
+			if(numROCK<numPAPER) return 2;
+		}
+		if(numSCISSORS>numPAPER) return 1;
+		if(numSCISSORS<numPAPER) return 2;
+		Random rand = new Random();
+		return rand.nextInt(3);
+	}
+
 	public void report(){
 		System.out.println(this.getName()+" "+this.getWinCnt()+" win, "+this.getLoseCnt()+" lose, "+this.getDrawCnt()+" draw\n");
 	}
 
-	public void receiveResult(Result result){
-		if(result==Result.WIN) this.winCnt++;
-		if(result==Result.LOSE) this.loseCnt++;
-		if(result==Result.DRAW) this.drawCnt++;
+	public void receiveResult(Result result, Hand opponentHand){
+		if(result == Result.WIN) this.winCnt++;
+		if(result == Result.LOSE) this.loseCnt++;
+		if(result == Result.DRAW) this.drawCnt++;
+		opponentHands.add(opponentHand);
+
+		if(opponentHand == Hand.ROCK) setTend(0);
+		if(opponentHand == Hand.SCISSORS) setTend(1);
+		if(opponentHand == Hand.PAPER) setTend(2);
+	}
+
+	public Hand getOpponentBeforeHand(){
+		if(opponentHands.isEmpty()) return null;
+		return opponentHands.get(opponentHands.size()-1);
+	}
+
+	protected void recordHand(Hand hand) {
+		myHands.add(hand);
 	}
 
 	public Hand showHand() {
@@ -58,7 +107,15 @@ public class RandomJankenPlayer {
 		} else {
 			play = Hand.SCISSORS;
 		}
+		myHands.add(play);
 		return play;
+	}
+
+	public void showHistory() {
+		System.out.println("history:");
+		for(int i = 0; i < myHands.size(); i++){
+			System.out.println((i+1) + ": " + myHands.get(i) + " vs " + opponentHands.get(i));
+		}
 	}
 
 	public String getName(){

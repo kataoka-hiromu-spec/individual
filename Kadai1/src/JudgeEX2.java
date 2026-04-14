@@ -7,34 +7,36 @@ public class JudgeEX2 {
 
     private void play(int n, int members) {
 
-        for(int i = 0; i < members; i++){
-			players[i].init();
-		}
-        int[] wins = new int[members];
-		int[] loses = new int[members];
-		int[] draws = new int[members];
+    for(int i = 0; i < members; i++){
+        players[i].init();
+    }
 
-        for(int i=0; i<members; i++){
-			for(int j=i+1; j<members; j++){
-				for(int k=0; k<n; k++){
-					Hand tmpHand1 = players[i].showHand();
-					Hand tmpHand2 = players[j].showHand();
-					if(tmpHand1.defeating()==tmpHand2){
-						wins[i]++;
-						loses[j]++;
+    for(int i=0; i<members; i++){
+        for(int j=i+1; j<members; j++){
+            for(int k=0; k<n; k++){
+					Hand h1 = players[i].showHand();
+					Hand h2 = players[j].showHand();
+
+					if(h1.defeating() == h2){
+						players[i].receiveResult(Result.WIN);
+						players[j].receiveResult(Result.LOSE);
 					}
-					else if(tmpHand1.defeatedBy()==tmpHand2){
-						loses[i]++;
-						wins[j]++;
+					else if(h1.defeatedBy() == h2){
+						players[i].receiveResult(Result.LOSE);
+						players[j].receiveResult(Result.WIN);
 					}
 					else{
-						draws[i]++;
-						draws[j]++;
+						players[i].receiveResult(Result.DRAW);
+						players[j].receiveResult(Result.DRAW);
 					}
 				}
+				System.out.println(players[i].getName()+" vs "+players[j].getName()+": ");
+				players[i].report();
+				System.out.println(players[j].getName()+" vs "+players[i].getName()+": ");
+				players[j].report();
 			}
 		}
-    }
+	}
 
     public static void main(String[] args) {
         try {
