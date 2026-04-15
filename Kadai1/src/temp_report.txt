@@ -392,9 +392,84 @@ Kadai1 tempレポート
             相手の手が固定されているためうまく動いているかがわかりやすい。
 
 \section{発展課題* 1.17}
-    戦略の説明:
-        相手がこれまでに出した手の回数を記録し、一番多く出している手に勝てる手を出す統計ベースの戦略。
-    アルゴリズムの説明:
-        相手が手を出すたびに各手の回数を記録し、次のジャンケンでその中の最頻値を取得、それに対して勝てる手を出すようになっている。
+    オリジナル戦略:
+        戦略の説明:
+            相手がこれまでに出した手の回数を記録し、一番多く出している手に勝てる手を出す統計ベースの戦略。
+        アルゴリズムの説明:
+            相手が手を出すたびに各手の回数を記録し、次のジャンケンでその中の最頻値を取得、それに対して勝てる手を出すようになっている。
+        実行結果:
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java .\Judge.java 10
+            Player1 : Yamada
+            Player2 : Suzuki
+
+            Player1: Yamada 8 win, 1 lose, 1 draw
+            Player2: Suzuki 1 win, 8 lose, 1 draw
+
+            history:
+            1: SCISSORS vs ROCK
+            2: ROCK vs ROCK
+            3: PAPER vs ROCK
+            4: PAPER vs ROCK
+            5: PAPER vs ROCK
+            6: PAPER vs ROCK
+            7: PAPER vs ROCK
+            8: PAPER vs ROCK
+            9: PAPER vs ROCK
+            10: PAPER vs ROCK
+        考察:
+            3手目で相手の手の傾向を理解し、すべてパーで勝利していることがわかる。
+
+    履歴学習型戦略:
+        アルゴリズムの説明:
+            プレイヤーが勝つたびに手にあったフィールドをインクリメントし、次に出す手を決定する。
+        実行結果. StrategyLearningPlayer vs JankenPlayerTypeB:
+            PS C:\Users\s02246908\ensyu1\code-2246908\Kadai1\src> java .\Judge.java 10
+            Player1 : Yamada
+            Player2 : Suzuki
+
+            Player1: Yamada 5 win, 1 lose, 4 draw
+            Player2: Suzuki 1 win, 5 lose, 4 draw
+
+            history:
+            1: ROCK vs ROCK
+            2: ROCK vs ROCK
+            3: ROCK vs ROCK
+            4: ROCK vs ROCK
+            5: SCISSORS vs ROCK
+            6: PAPER vs ROCK
+            7: PAPER vs ROCK
+            8: PAPER vs ROCK
+            9: PAPER vs ROCK
+            10: PAPER vs ROCK
+        考察:
+            序盤はあいこ、負けが続いているが、一度勝ってからは同じ手を出すようになっている。
     
 \section{課題1.18}
+    JankenPlayer に含めたフィールド:
+        protected String name;
+        protected int winCnt;
+        protected int loseCnt;
+        protected int drawCnt;
+        private Random random;
+        private ArrayList<Hand> opponentHands;
+        private int WDL;
+        private int numROCK, numSCISSORS, numPAPER;
+        private int winRock, winScissors, winPaper;
+
+    JankenPlayerにおいて実装したメソッド:
+        public String getName()
+        public void init()
+        public int getWinCnt()
+        public int getLoseCnt()
+        public int getDrawCnt()
+        public void setWDL(int n)
+        public int getWDL()
+        public void setTend(int n)
+        public int getTend()
+        public void setWinRock()
+        public void setWinScissors()
+        public void setWinPaper()
+        public int getBestChoice()
+        public void report()
+        public void receiveResult(Result result, Hand opponentHand)
+        public Hand getOpponentBeforeHand()

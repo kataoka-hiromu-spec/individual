@@ -1,7 +1,7 @@
 public class Judge {
-	private RandomJankenPlayer player1, player2;
+	private JankenPlayer player1, player2;
 
-	public Judge(RandomJankenPlayer player1, RandomJankenPlayer player2){
+	public Judge(JankenPlayer player1, JankenPlayer player2){
 		this.player1 = player1;
 		this.player2 = player2;
 	}
@@ -66,6 +66,10 @@ public class Judge {
 				player2.receiveResult(Result.LOSE, hand1);
 				this.player1.setWDL(0);
 				this.player2.setWDL(2);
+				if(hand1==Hand.ROCK) player1.setWinRock();
+				if(hand1==Hand.SCISSORS) player1.setWinScissors();
+				if(hand1==Hand.PAPER) player1.setWinPaper();
+
 			}
 			else if(hand1.defeatedBy() == hand2) {
 				lose1++; win2++;
@@ -73,6 +77,9 @@ public class Judge {
 				player2.receiveResult(Result.WIN, hand1);
 				this.player1.setWDL(2);
 				this.player2.setWDL(0);
+				if(hand1==Hand.ROCK) player2.setWinRock();
+				if(hand1==Hand.SCISSORS) player2.setWinScissors();
+				if(hand1==Hand.PAPER) player2.setWinPaper();
 			}
 			else{
 				draw1++; draw2++;
@@ -91,13 +98,12 @@ public class Judge {
 	public static void main(String[] args) {
 		try {
 			int num = Integer.parseInt(args[0]); // ラウンド数
-			RandomJankenPlayer player1 = new MyJankenPlayer("Yamada");
-			RandomJankenPlayer player2 = new JankenPlayerTypeA("Suzuki");
+			JankenPlayer player1 = new ConcreteMyJankenPlayer("Yamada");
+			JankenPlayer player2 = new ConcreteStrategyLearningPlayer("Suzuki");
 			Judge judge = new Judge(player1, player2);
 			judge.play(num);
-			player1.showHistory();
 		} catch(Exception e) {
-			System.out.println("this requires an integer argument.");
+			e.printStackTrace();
 		}
 	}
 }

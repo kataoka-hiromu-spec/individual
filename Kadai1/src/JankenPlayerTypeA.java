@@ -2,6 +2,7 @@ public class JankenPlayerTypeA extends RandomJankenPlayer{
     public JankenPlayerTypeA(String name) {
         super(name);
     } 
+    @Override
     public Hand showHand() {
         if(super.getWDL() == 2) {
             Hand opponentLast = super.getOpponentBeforeHand();
@@ -12,6 +13,7 @@ public class JankenPlayerTypeA extends RandomJankenPlayer{
         }
         return super.showHand();
     }
+    
     public static void main ( String [] args ) {
         RandomJankenPlayer player1 = new RandomJankenPlayer (" Suzuki ");
         RandomJankenPlayer player2 = new JankenPlayerTypeA (" Yamamoto ");

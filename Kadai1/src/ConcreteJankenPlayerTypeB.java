@@ -1,15 +1,14 @@
-public class JankenPlayerTypeB extends RandomJankenPlayer{
-    public JankenPlayerTypeB(String name) {
+public class ConcreteJankenPlayerTypeB extends JankenPlayer{
+    public ConcreteJankenPlayerTypeB(String name) {
         super(name);
     } 
     @Override
     public Hand showHand () {
-        super.recordHand(Hand.ROCK);
         return Hand.ROCK ;
     }
     public static void main ( String [] args ) {
-        RandomJankenPlayer player1 = new RandomJankenPlayer (" Suzuki ");
-        RandomJankenPlayer player2 = new JankenPlayerTypeB (" Yamamoto ");
+        JankenPlayer player1 = new ConcreteRandomJankenPlayer (" Suzuki ");
+        JankenPlayer player2 = new ConcreteJankenPlayerTypeB (" Yamamoto ");
         for ( int i = 0; i < 10; i ++) {
             Hand hand1 = player1.showHand();
             Hand hand2 = player2.showHand();

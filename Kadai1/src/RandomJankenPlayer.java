@@ -1,5 +1,5 @@
-import java.util.Random;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class RandomJankenPlayer {
 	private String name;
@@ -11,13 +11,13 @@ public class RandomJankenPlayer {
 	private ArrayList<Hand> opponentHands;
 	private int WDL;
 	private int numROCK, numSCISSORS, numPAPER;
+	private int winRock, winScissors, winPaper;
 
 	public RandomJankenPlayer(String name) {
 		this.name = name;
 		this.winCnt = winCnt;
 		this.loseCnt = loseCnt;
 		this.drawCnt = drawCnt;
-		this.
 		random = new Random();
 		myHands = new ArrayList<>(); // 空の ArrayList で初期化
 		opponentHands = new ArrayList<>();
@@ -69,6 +69,29 @@ public class RandomJankenPlayer {
 		}
 		if(numSCISSORS>numPAPER) return 1;
 		if(numSCISSORS<numPAPER) return 2;
+		Random rand = new Random();
+		return rand.nextInt(3);
+	}
+
+	public void setWinRock(){
+		this.winRock++;
+	}
+
+	public void setWinScissors(){
+		this.winScissors++;
+	}
+
+	public void setWinPaper(){
+		this.winPaper++;
+	}
+
+	public int getBestChoice(){
+		if(winRock>winScissors){
+			if(winRock>winPaper) return 0;
+			if(winRock<winPaper) return 2;
+		}
+		if(winScissors>winPaper) return 1;
+		if(winScissors<winPaper) return 2;
 		Random rand = new Random();
 		return rand.nextInt(3);
 	}
